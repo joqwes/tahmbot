@@ -1,8 +1,11 @@
 {
   "name": "hyperbot",
   "version": "1.0.0",
-  "description": "Hyperion Discord bot",
+  "description": "A-TECH Discord bot",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "author": "joqwes",
   "license": "MIT",
   "dependencies": {
