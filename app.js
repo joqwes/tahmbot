@@ -5,7 +5,7 @@ const filter = ['fuck', 'shit', 'dick', 'ass', 'bitch', 'cunt', 'nigga', 'nigger
 
 client.on('ready', () => {
   console.log("I am ready to go!");
-  client.user.setActivity('you prep ;)', {type: 'WATCHING'});
+  client.user.setActivity('v.1.0.1');
   client.user.setUsername('Hyperbot')
 });
 
@@ -39,13 +39,14 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on(('message'), message => {
-  //let member = message.username;
+  if (message.author.bot) return;
+  const vent = client.channels.get('400872483470966785');
 
   if (filter.some(word => message.content.toLowerCase().includes(word.toLowerCase()))) {
+    if(message.channel == vent) return;
     message.delete();
   }
 
-  if (message.author.bot) return;
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
@@ -54,7 +55,7 @@ client.on(('message'), message => {
       let commandFile = require(`./commands/${command}.js`);
       commandFile.run(client, message, args);
     } catch (err) {
-      console.error(`USER tried to use an unrecognized command.`);
+      console.error(err);
     }
   }
 
